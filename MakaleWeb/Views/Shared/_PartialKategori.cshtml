@@ -1,0 +1,16 @@
+﻿@using MakaleWeb.Entities
+@using MakaleWeb.BusinessLayer
+
+@{ 
+    KategoriYonet k = new KategoriYonet();
+    List<Kategoriler> kategorilistesi=k.KategoriGetir();
+}
+<p class="lead">Kategoriler</p>
+<div class="list-group">
+    <a href="@Url.Action("Index","Home")" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span>Tümü</a>
+    @foreach (Kategoriler item in kategorilistesi)
+    {
+        <a href="/Home/Kategori/@item.ID" title="@item.Aciklama" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span>@item.Baslik</a>
+    }   
+
+</div>

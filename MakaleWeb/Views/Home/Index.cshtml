@@ -1,0 +1,91 @@
+﻿@using MakaleWeb.Entities
+@model List<Makaleler>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            @Html.Partial("_PartialKategori")
+        </div>
+        <div class="col-md-9">
+            <div class="row carousel-holder">
+                <div class="col-md-12">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                @foreach (Makaleler item in Model)
+                {
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img src="http://placehold.it/320x150" alt="@item.Baslik">
+                            <div class="caption">
+                                <h4>
+                                    <a href="#">@item.Baslik</a>
+                                </h4>
+                                <h6 class="text-right">
+                                    <span class="glyphicon glyphicon-user"></span>@item.Kullanici.Ad<br />
+                                    <span class="glyphicon glyphicon-time"></span>@item.DegistirmeTarihi.ToString("dd.MM.yy HH:mm")
+                                </h6>
+
+                                @if (string.IsNullOrEmpty(item.Metin) == false && item.Metin.Length > 50)
+                                {
+                                    <p> @(item.Metin.Substring(0, 50) + "...") </p>
+                                    <p class="pull-right"> <a href="#" class="btn btn-default btn-sm">devamını <span class="glyphicon glyphicon-chevron-right"></span></a></p>
+                                }
+                                else
+                                {
+                                    <p> @item.Metin </p>
+                                }
+
+
+                            </div>
+                            <div> <hr /></div>
+
+                            <div class="ratings">
+                                <p class="pull-right">
+                                    <button class="btn btn-default">
+                                        <span class="glyphicon glyphicon-comment"></span>Yorumlar
+                                    </button>
+                                </p>
+                                <p>
+                                    <button class="btn btn-default btn-sm" type="button">
+                                        <span class="glyphicon glyphicon-star-empty"></span>@item.BegeniSayisi
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
